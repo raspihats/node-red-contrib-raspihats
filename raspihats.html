@@ -1,0 +1,135 @@
+
+<!-- ########################### CONFIG NODE ############################### -->
+<script type="text/x-red" data-template-name="board-config">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-gear"></i> Board</label>
+        <select id="node-config-input-name">
+            <option value="Di16 I2C-HAT">Di16 I2C-HAT</option>
+            <option value="Rly10 I2C-HAT">Rly10 I2C-HAT</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-config-input-address"><i class="fa fa-at"></i> Address</label>
+        <input type="text" id="node-config-input-address">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('board-config',{
+        category: 'config',
+        defaults: {
+            name: {required:true},
+            address: {required:true, validate:RED.validators.number()},
+        },
+        label: function() {
+            return this.name + " (" + this.address + ")";
+        }
+    });
+</script>
+
+
+<!-- ##################### DigitalInput(DI) NODE ########################### -->
+<script type="text/x-red" data-template-name="DI">
+    <div class="form-row">
+        <label for="node-input-board"><i class="fa fa-gear"></i> Board</label>
+        <input type="text" id="node-input-board" placeholder="Board">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-channel"><i class="fa fa-tag"></i> Channel</label>
+        <input type="text" id="node-input-channel" placeholder="Channel">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-polling"><i class="fa fa-tag"></i> Polling[ms]</label>
+        <input type="text" id="node-input-polling" placeholder="Polling">
+    </div>
+
+    <br/>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    
+</script>
+
+<script type="text/x-red" data-help-name="DI">
+   <p>Digital Input</p>
+   <p>Periodically reads a Digital Input and sends a <b>msg</b> object with 0 or 1 as the <b>msg.payload</b>.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('DI',{
+        category: 'raspihats',
+        color: '#a6bbcf',
+        defaults: {
+            board: {type:"board-config"},
+            channel: {value:0, required:true},
+            polling: {value:200, required:true},
+            name: {value:""}, 
+        },
+        inputs:0,
+        outputs:1,
+        icon: "raspihats_logo.png",
+        label: function() {
+            return this.name || "DI";
+        },
+        labelStyle: function() {
+            return "DI"?"node_label_italic":"";
+        }
+    });
+</script>
+
+
+<!-- ##################### DigitalOutput(DQ) NODE ########################### -->
+<script type="text/x-red" data-template-name="DQ">
+    <div class="form-row">
+        <label for="node-input-board"><i class="fa fa-gear"></i> Board</label>
+        <input type="text" id="node-input-board" placeholder="Board">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-channel"><i class="fa fa-tag"></i> Channel</label>
+        <input type="text" id="node-input-channel" placeholder="Channel">
+    </div>
+
+    <br/>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="DQ">
+   <p>Digital Output</p>
+   <p>Writes a Digital Output when it receives a <b>msg</b> object with a <b>msg.payload</b> of 0 or 1.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('DQ',{
+        category: 'raspihats',
+        color: '#a6bbcf',
+        defaults: {
+            board: {type:"board-config"},
+            channel: {value:0, required:true},
+            name: {value:""}, 
+        },
+        align: 'right',
+        inputs:1,
+        outputs:0,
+        icon: "raspihats_logo.png",
+        label: function() {
+            return this.name || "DQ";
+        },
+        labelStyle: function() {
+            return "DQ"?"node_label_italic":"";
+        },
+        oneditsave: function() {
+          this.warn("oneditsave");
+        },
+        oneditprepare: function() {
+          this.warn("oneditprep");
+        },
+    });
+</script>
