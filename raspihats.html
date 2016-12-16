@@ -2,10 +2,15 @@
 <!-- ########################### CONFIG NODE ############################### -->
 <script type="text/x-red" data-template-name="board-config">
     <div class="form-row">
-        <label for="node-config-input-name"><i class="fa fa-gear"></i> Board</label>
+        <label for="node-config-input-name"><i class="fa fa-gear"></i> Name</label>
         <select id="node-config-input-name">
             <option value="Di16 I2C-HAT">Di16 I2C-HAT</option>
             <option value="Rly10 I2C-HAT">Rly10 I2C-HAT</option>
+            <option value="Di6Rly6 I2C-HAT">Di6Rly6 I2C-HAT</option>
+            <option value="DI16ac I2C-HAT">DI16ac I2C-HAT</option>
+            <option value="DQ10rly I2C-HAT">DQ10rly I2C-HAT</option>
+            <option value="DQ16oc I2C-HAT">DQ16oc I2C-HAT</option>
+            <option value="DI6acDQ6rly I2C-HAT">DI6acDQ6rly I2C-HAT</option>
         </select>
     </div>
 
@@ -51,7 +56,6 @@
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
-    
 </script>
 
 <script type="text/x-red" data-help-name="DI">
