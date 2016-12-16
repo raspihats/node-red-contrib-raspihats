@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-raspihats",
   "version": "0.0.1",
-  "description": "Node Red node for controlling digital outputs of raspihats.com boards",
+  "description": "Node Red node for controlling raspihats.com boards",
   "main": "raspihats.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,8 +24,7 @@
   },
   "homepage": "https://github.com/raspihats/node-red-raspihats-nodes",
   "dependencies": {
-    "i2c": "^0.2.3",
-    "path": ""
+
   },
   "node-red": {
     "nodes": {

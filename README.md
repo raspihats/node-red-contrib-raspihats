@@ -18,7 +18,7 @@ To manually install using this repo:
 
 ## Copyright and license
 
-Copyright 2016, 2016 raspihats under [the MIT license](LICENSE).
+Copyright 2016, 2016 Florin C. under [the MIT license](LICENSE).
 
 ## Nodes Information
 
