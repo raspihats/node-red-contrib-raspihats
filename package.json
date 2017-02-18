@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-raspihats",
-  "version": "0.1.0",
-  "description": "Node Red node for controlling raspihats.com boards",
+  "version": "1.0.0",
+  "description": "Node Red nodes for controlling raspihats.com boards",
   "main": "raspihats.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,14 +17,14 @@
     "output",
     "inputs"
   ],
-  "author": "Florin C <hardhat@raspihats.com> (https://raspihats.com)",
+  "author": "Florin C. <hardhat@raspihats.com> (https://raspihats.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/raspihats/node-red-contrib-raspihats/issues"
   },
   "homepage": "https://github.com/raspihats/node-red-contrib-raspihats",
   "dependencies": {
-    "raspihats": "file:///home/pi/workspace/git_source/raspihats_nodejs/raspihats-0.1.0.tgz"
+    "raspihats": "^1.0.0"
   },
   "node-red": {
     "nodes": {

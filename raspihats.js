@@ -7,11 +7,7 @@ module.exports = function(RED) {
       if(boardConfig.name.includes(token)) {
         var name = boardConfig.name.replace(token, "").trim();
         var board = new raspihats.i2cHats[name](parseInt(boardConfig.address, 16));
-        //console.log("#" + board.getName() + "#" + " " + typeof(board.getName()));
-        //console.log("#" + boardConfig.name + "#" + " " + typeof(boardConfig.name));
-        console.log(board.getName().length);
-        console.log(boardConfig.name.length);
-        if(board.getName().includes(boardConfig.name)) {
+        if(board.getName() === boardConfig.name) {
           return board;
         }
         throw "Building board object failed! Check type for ";
@@ -57,7 +53,7 @@ module.exports = function(RED) {
 
         this.on('input', function (msg) {
             this.board.DQ.setChannel(this.channel, msg.payload);
-            this.warn("I saw a payload: " + msg.payload + " for " + this.board + " channel:" + this.channel);
+            //this.warn("I saw a payload: " + msg.payload + " for " + this.board + " channel:" + this.channel);
         });
 
         this.on("close", function() {

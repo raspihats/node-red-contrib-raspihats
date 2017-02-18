@@ -29,6 +29,12 @@
         },
         label: function() {
             return this.name + " (" + this.address + ")";
+        },
+        oneditprepare: function() {
+            console.log("here1");
+        },
+        oneditsave: function() {
+            console.log("here2");
         }
     });
 </script>
@@ -129,11 +135,11 @@
         labelStyle: function() {
             return "DQ"?"node_label_italic":"";
         },
-        oneditsave: function() {
-          this.warn("oneditsave");
-        },
         oneditprepare: function() {
-          this.warn("oneditprep");
+          console.log("oneditprep");
         },
+        oneditsave: function() {
+          console.log("oneditsave");
+        }
     });
 </script>
