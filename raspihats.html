@@ -1,13 +1,14 @@
 
 <!-- ########################### CONFIG NODE ############################### -->
-<script type="text/x-red" data-template-name="i2c-board">
+<script type="text/x-red" data-template-name="I2C-HAT">
     <div class="form-row">
-        <label for="node-config-input-name"><i class="fa fa-gear"></i> Name </label>
-        <select id="node-config-input-name">
+        <label for="node-config-input-model"><i class="fa fa-gear"></i> Model </label>
+        <select id="node-config-input-model">
             <option value="Di16 I2C-HAT">Di16 I2C-HAT</option>
             <option value="Rly10 I2C-HAT">Rly10 I2C-HAT</option>
             <option value="Di6Rly6 I2C-HAT">Di6Rly6 I2C-HAT</option>
             <option value="DI16ac I2C-HAT">DI16ac I2C-HAT</option>
+            <option value="DQ8rly I2C-HAT">DQ8rly I2C-HAT</option>
             <option value="DQ10rly I2C-HAT">DQ10rly I2C-HAT</option>
             <option value="DQ16oc I2C-HAT">DQ16oc I2C-HAT</option>
             <option value="DI6acDQ6rly I2C-HAT">DI6acDQ6rly I2C-HAT</option>
@@ -21,14 +22,14 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('i2c-board', {
-        category: 'config',
+    RED.nodes.registerType("I2C-HAT", {
+        category: "config",
         defaults: {
-            name: {required:true, value:""},
+            model: {required:true, value:""},
             address: {required:true, validate:RED.validators.number()},
         },
         label: function() {
-            return this.name + " (" + this.address + ")";
+            return this.model + " @" + this.address;
         },
         oneditprepare: function() {
             // console.log("here1");
@@ -70,17 +71,17 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('DI',{
-        category: 'raspihats',
-        color: '#a6bbcf',
+    RED.nodes.registerType("DI",{
+        category: "raspihats",
+        color: "#a6bbcf",
         defaults: {
-            board: {type:"i2c-board"},
+            board: {type:"I2C-HAT"},
             channel: {value:0, required:true, validate:RED.validators.number()},
             polling: {value:200, required:true, validate:RED.validators.number()},
             name: {value:""},
         },
-        inputs:0,
-        outputs:1,
+        inputs: 0,
+        outputs: 1,
         icon: "raspihats_logo.png",
         label: function() {
             return this.name || "DI";
@@ -117,17 +118,17 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('DQ',{
-        category: 'raspihats',
-        color: '#a6bbcf',
+    RED.nodes.registerType("DQ",{
+        category: "raspihats",
+        color: "#a6bbcf",
         defaults: {
-            board: {type:"i2c-board"},
+            board: {type:"I2C-HAT"},
             channel: {value:0, required:true, validate:RED.validators.number()},
             name: {value:""},
         },
-        align: 'right',
-        inputs:1,
-        outputs:0,
+        align: "right",
+        inputs: 1,
+        outputs: 0,
         icon: "raspihats_logo.png",
         label: function() {
             return this.name || "DQ";
