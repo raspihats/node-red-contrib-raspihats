@@ -1,6 +1,13 @@
 module.exports = function(RED) {
     "use strict";
     var raspihats = require('raspihats');
+    var discan = require('./discan');
+
+
+    RED.events.on("nodes-started",function() {
+        // Start DI scanner
+        discan.start(RED.log);
+    })
 
     function I2CHatNode(config) {
 
@@ -12,7 +19,9 @@ module.exports = function(RED) {
                 return board;
             }
             catch(err) {
-                throw "Building board object failed for " + model + " @" + address + ". " + err;
+                var message = model + " @" + address + " not responding!!! " + err;
+                // RED.log.error(message);
+                throw message;
             }
         }
 
@@ -21,27 +30,23 @@ module.exports = function(RED) {
     }
     RED.nodes.registerType("I2C-HAT", I2CHatNode);
 
-
     function DINode(config) {
         RED.nodes.createNode(this, config);
 
         this.board = RED.nodes.getNode(config.board).board;
         this.channel = config.channel;
-        this.polling = config.polling;
 
         var node = this;
-        var intervalFunction = function() {
-          var msg = {payload: node.board.DI.getChannel(node.channel)};
-          node.send(msg);
+        var listener = function(state) {
+            node.send({payload: state});
         };
-        var intervalTimer = setInterval(intervalFunction, this.polling);
+        discan.register(this.board, this.channel, listener);
 
         this.on("close", function() {
-            clearInterval(intervalTimer);
+            discan.deregister(this.board, this.channel, listener);
         });
     }
     RED.nodes.registerType("DI", DINode);
-
 
     function DQNode(config) {
         RED.nodes.createNode(this, config);
@@ -50,7 +55,14 @@ module.exports = function(RED) {
         this.channel = config.channel;
 
         this.on('input', function (msg) {
-            this.board.DQ.setChannel(this.channel, msg.payload);
+            try {
+                this.board.DQ.setChannel(this.channel, msg.payload);
+            }
+            catch(err) {
+                var message = this.board.name + " @" + this.board.address.toString(16) + " not responding!!! " + err;
+                RED.log.error(message);
+            }
+            
         });
 
         this.on("close", function() {
@@ -58,4 +70,5 @@ module.exports = function(RED) {
         });
     }
     RED.nodes.registerType("DQ", DQNode);
+
 };
