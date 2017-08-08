@@ -11,16 +11,14 @@ or locally in your HOME directory:
 `cd $HOME/.node-red`  
 `npm install node-red-contrib-raspihats`
 
-## Copyright and license
-
-Copyright 2016, 2016 Florin C. under [the MIT license](LICENSE).
-
 ## Nodes Information
 
 ### I2C-HAT DI(DigitalInput)
-Node used to read a DigitalInput, generates a **msg** object with **msg.payload** of 0 or 1 depending on the state of the Digital Input channel.
+Node used to read a I2C-HAT Digital Input channel, generates a **msg** object with **msg.payload** of 0 or 1 depending on the state of the Digital Input channel.
 
 ### I2C-HAT DQ(DigitalOutput)
-Node used to write a DigitalOutput, expects a **msg** object with a **msg.payload** of 0 or 1 and writes this to the Digital Output channel.
+Node used to write a I2C-HAT Digital Output channel, expects a **msg** object with a **msg.payload** of 0 or 1 and writes this to the Digital Output channel.
 
+## Copyright and license
 
+Copyright 2016, 2016 Florin C. under [the MIT license](LICENSE).
