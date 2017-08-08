@@ -4,11 +4,11 @@ A collection of [Node-RED](http://nodered.org) nodes for the Raspberry Pi add-on
 
 ## Installation
 
-Install globally:
+Install globally:  
 `npm install -g node-red-contrib-raspihats`
 
-or locally in your HOME directory:
-`cd $HOME/.node-red`
+or locally in your HOME directory:  
+`cd $HOME/.node-red`  
 `npm install node-red-contrib-raspihats`
 
 ## Copyright and license
