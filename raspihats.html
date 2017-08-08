@@ -42,7 +42,7 @@
 
 
 <!-- ##################### DigitalInput(DI) NODE ########################### -->
-<script type="text/x-red" data-template-name="DI">
+<script type="text/x-red" data-template-name="I2C-HAT DI">
     <div class="form-row">
         <label for="node-input-board"><i class="fa fa-gear"></i> Board </label>
         <input type="text" id="node-input-board" placeholder="Board">
@@ -60,15 +60,13 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="DI">
-   <p>Digital Input
-   <br>
-   Raspihats input node. Generates a <b>msg.payload</b> of 0 or 1 depending on the state of the Digital Input.
-   </p>
+<script type="text/x-red" data-help-name="I2C-HAT DI">
+   <p>Digital Input<br>Raspihats input node. Generates a <b>msg.payload</b> of 0 or 1 depending on the state of the Digital Input. </p>
+   <p>See <a href="http://raspihats.com">raspihats.com</a> for more information.</p>
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType("DI",{
+    RED.nodes.registerType("I2C-HAT DI",{
         category: "raspihats",
         color: "#a6bbcf",
         defaults: {
@@ -80,17 +78,17 @@
         outputs: 1,
         icon: "raspihats_logo.png",
         label: function() {
-            return this.name || "DI";
+            return this.name || "I2C-HAT DI";
         },
         labelStyle: function() {
-            return "DI"?"node_label_italic":"";
+            return "I2C-HAT DI"?"node_label_italic":"";
         }
     });
 </script>
 
 
 <!-- ##################### DigitalOutput(DQ) NODE ########################### -->
-<script type="text/x-red" data-template-name="DQ">
+<script type="text/x-red" data-template-name="I2C-HAT DQ">
     <div class="form-row">
         <label for="node-input-board"><i class="fa fa-gear"></i> Board </label>
         <input type="text" id="node-input-board" placeholder="Board">
@@ -108,16 +106,13 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="DQ">
-   <p>
-   Digital Output
-   <br>
-   Raspihats output node. Sets a Digital Output when it receives a <b>msg.payload</b> of 0 or 1.
-   </p>
+<script type="text/x-red" data-help-name="I2C-HAT DQ">
+   <p>Digital Output<br>Raspihats output node. Sets a Digital Output when it receives a <b>msg.payload</b> of 0 or 1. </p>
+   <p>See <a href="http://raspihats.com">raspihats.com</a> for more information.</p>
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType("DQ",{
+    RED.nodes.registerType("I2C-HAT DQ",{
         category: "raspihats",
         color: "#a6bbcf",
         defaults: {
@@ -130,10 +125,10 @@
         outputs: 0,
         icon: "raspihats_logo.png",
         label: function() {
-            return this.name || "DQ";
+            return this.name || "I2C-HAT DQ";
         },
         labelStyle: function() {
-            return "DQ"?"node_label_italic":"";
+            return "I2C-HAT DQ"?"node_label_italic":"";
         },
         oneditprepare: function() {
           console.log("oneditprep");

@@ -3,16 +3,15 @@ module.exports = (function(){
     var boardListeners = [];
     var intervalTimer;
     var logger = null;
-    var logHeader = "[Raspihats : DI Scan] ";
 
     function log(level, message) {
         if(logger != null) {
-            logger[level](logHeader + message)
+            logger(level, "[discan] " + message)
         }
     }
 
     function boardInfo(board) {
-        return board.name + "@" + board.address.toString(16);
+        return board.name + "@0x" + board.address.toString(16);
     }
 
     function triggerInitial(channels, diValue) {

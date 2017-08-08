@@ -2,12 +2,10 @@ module.exports = function(RED) {
     "use strict";
     var raspihats = require('raspihats');
     var discan = require('./discan');
-
-
-    RED.events.on("nodes-started",function() {
-        // Start DI scanner
-        discan.start(RED.log);
-    })
+    
+    function log(level, message) {
+        RED.log[level]("[raspihats] " + message);
+    }
 
     function I2CHatNode(config) {
 
@@ -20,7 +18,6 @@ module.exports = function(RED) {
             }
             catch(err) {
                 var message = model + " @" + address + " not responding!!! " + err;
-                // RED.log.error(message);
                 throw message;
             }
         }
@@ -30,7 +27,7 @@ module.exports = function(RED) {
     }
     RED.nodes.registerType("I2C-HAT", I2CHatNode);
 
-    function DINode(config) {
+    function I2CHatDINode(config) {
         RED.nodes.createNode(this, config);
 
         this.board = RED.nodes.getNode(config.board).board;
@@ -46,9 +43,9 @@ module.exports = function(RED) {
             discan.deregister(this.board, this.channel, listener);
         });
     }
-    RED.nodes.registerType("DI", DINode);
+    RED.nodes.registerType("I2C-HAT DI", I2CHatDINode);
 
-    function DQNode(config) {
+    function I2CHatDQNode(config) {
         RED.nodes.createNode(this, config);
 
         this.board = RED.nodes.getNode(config.board).board;
@@ -59,16 +56,20 @@ module.exports = function(RED) {
                 this.board.DQ.setChannel(this.channel, msg.payload);
             }
             catch(err) {
-                var message = this.board.name + " @" + this.board.address.toString(16) + " not responding!!! " + err;
-                RED.log.error(message);
+                var message = this.board.name + " @0x" + this.board.address.toString(16) + " not responding!!! " + err;
+                log("error", message);
             }
-            
         });
 
         this.on("close", function() {
 
         });
     }
-    RED.nodes.registerType("DQ", DQNode);
+    RED.nodes.registerType("I2C-HAT DQ", I2CHatDQNode);
+
+    RED.events.on("nodes-started",function() {
+        // Start DI scanner after all nodes are started.
+        discan.start(log);
+    })
 
 };
