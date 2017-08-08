@@ -17,8 +17,10 @@ Copyright 2016, 2016 Florin C. under [the MIT license](LICENSE).
 
 ## Nodes Information
 
-### DigitalInput
-Node used to read a DigitalInput, has configurable scan interval(in milliseconds), sends a **msg** object with a **msg.payload** of 0 or 1.
+### I2C-HAT DI(DigitalInput)
+Node used to read a DigitalInput, generates a **msg** object with **msg.payload** of 0 or 1 depending on the state of the Digital Input channel.
 
-### DigitalOutput
-Node used to write a DigitalOutput, expects a **msg** object with a **msg.payload** of 0 or 1.
+### I2C-HAT DQ(DigitalOutput)
+Node used to write a DigitalOutput, expects a **msg** object with a **msg.payload** of 0 or 1 and writes this to the DigitalOutput.
+
+
