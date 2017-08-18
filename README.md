@@ -1,6 +1,6 @@
 # Raspihats Node-RED Nodes
 
-A collection of [Node-RED](http://nodered.org) nodes for the Raspberry Pi add-on boards at [raspihats](http://raspihats.com). See below for a list.
+A collection of [Node-RED](http://nodered.org) nodes for the Raspberry Pi add-on boards from [raspihats.com](http://raspihats.com). See below for a list.
 
 ## Installation
 
