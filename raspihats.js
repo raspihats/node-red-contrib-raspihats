@@ -35,7 +35,7 @@ module.exports = function(RED) {
 
         var node = this;
         var listener = function(state) {
-            node.send({payload: state});
+            node.send({payload: Boolean(state)});
         };
         discan.register(this.board, this.channel, listener);
 
