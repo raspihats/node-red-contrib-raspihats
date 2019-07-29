@@ -4,20 +4,38 @@ A collection of [Node-RED](http://nodered.org) nodes for the Raspberry Pi add-on
 
 ## Installation
 
-Go to your Node-RED user data directory and install:  
-`cd $HOME/.node-red`
-`npm install node-red-contrib-raspihats`
-You will then need to restart Node-RED for it to pick-up the new nodes.
+Go to your Node-RED user data directory and install this package:
 
-## Nodes Information
+```
+cd $HOME/.node-red
+npm install node-red-contrib-raspihats
+```
 
-### I2C-HAT Read DI(DigitalInput)
+If Node-RED is running, then you'll then need to restart Node-RED for it to pick-up the new nodes.
 
-Node used to read a I2C-HAT Digital Input channel, generates a `msg` object with `msg.payload` that is `true` or `false` depending on the state of the Digital Input channel.
+## Nodes Categories Information
 
-### I2C-HAT Write DQ(DigitalOutput)
+### 1. Raspihats I2CHat
 
-Node used to write a I2C-HAT Digital Output channel, expects a `msg` object with a `msg.payload` that is `true` or `false` and writes this to the Digital Output channel.
+#### DI Read(DigitalInput)
+
+Node used to read a I2C-HAT Digital Input channel state, generates a `msg` object with `msg.payload` that is `true` or `false` depending on the state of the Digital Input channel.
+
+A polling mechanism is used for reading the DigitalInputs states, target polling interval is 10ms.
+
+#### DQ Read (DigitalOutput)
+
+Node used to read a I2C-HAT Digital Output channel state, generates a `msg` object with `msg.payload` that is `true` or `false` depending on the state of the Digital Input channel.
+
+A polling mechanism is used for reading the DigitalOutputs states, target polling interval is 10ms.
+
+#### DQ Write(DigitalOutput)
+
+Node used to write a I2C-HAT Digital Output channel state, expects a `msg` object with a `msg.payload` that is `true` or `false` and writes this to the Digital Output channel.
+
+## TODO
+
+- Replace polling mechanism for Raspihats I2CHat/DI Read with a interrupt based mechanism
 
 ## Copyright and license
 
