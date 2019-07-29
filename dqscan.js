@@ -5,7 +5,7 @@ module.exports = (() => {
 
   const log = (level, message) => {
     if (logger != null) {
-      logger(level, "[discan] " + message);
+      logger(level, "[dqscan] " + message);
     }
   };
 
@@ -27,31 +27,31 @@ module.exports = (() => {
   const scanner = () => {
     monitors.forEach(monitor => {
       try {
-        const diValue = monitor.board.DI.getValue();
-        if (monitor.diValueOld === null) {
+        const dqValue = monitor.board.DQ.getValue();
+        if (monitor.dqValueOld === null) {
           // trigger callback for inital value
           monitor.listeners.forEach(listener => {
-            const state = (diValue >> listener.channel) & 0x01;
+            const state = (dqValue >> listener.channel) & 0x01;
             listener.callback(state);
           });
         } else {
           monitor.listeners.forEach(listener => {
-            const state = (diValue >> listener.channel) & 0x01;
-            const stateOld = (monitor.diValueOld >> listener.channel) & 0x01;
+            const state = (dqValue >> listener.channel) & 0x01;
+            const stateOld = (monitor.dqValueOld >> listener.channel) & 0x01;
             if (state != stateOld) {
               // trigger callback for edge change
               listener.callback(state);
             }
           });
         }
-        monitor.diValueOld = diValue;
+        monitor.dqValueOld = dqValue;
 
         if (monitor.error != null) {
           monitor.error = null;
           log("warn", getBoardInfo(monitor.board) + " responding again!!!");
         }
       } catch (error) {
-        monitor.diValueOld = null;
+        monitor.dqValueOld = null;
 
         if (monitor.error == null) {
           monitor.error = error;
@@ -89,7 +89,7 @@ module.exports = (() => {
       monitors.push({
         board: board,
         listeners: [{ channel, callback }],
-        diValueOld: null,
+        dqValueOld: null,
         error: null
       });
     }
